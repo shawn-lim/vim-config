@@ -3,8 +3,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin('~/.vim/bundle/')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
-" -- Safe Essentials -- 
+" -- Safe Essentials --
 Plugin 'kien/ctrlp.vim' " - CTRLP - required file opener
 Plugin 'mattn/emmet-vim' " - HTML, CSS Expander
 Plugin 'othree/html5.vim' " - HTML5 Support
@@ -23,34 +23,46 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'jistr/vim-nerdtree-tabs' " - Tab view for Nerdtree
 Plugin 'scrooloose/nerdtree.git' " - Nerdtree folder viewer
 
-Plugin 'nathanaelkane/vim-indent-guides' " - Indent Guides
+"Plugin 'nathanaelkane/vim-indent-guides' " - Indent Guides
+Plugin 'Yggdroot/indentLine'
 
-Plugin 'vim-airline/vim-airline-themes' " - Themes for airlines 
+Plugin 'vim-airline/vim-airline-themes' " - Themes for airlines
 Plugin 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
 
-" -- CSS -- 
+" --- Logistics --- "
+Plugin 'tpope/vim-fugitive' " -- Git wrapper
+Plugin 'airblade/vim-gitgutter' " -- Git Gutter
+Plugin 'thaerkh/vim-workspace' " -- Vim workspace
+Plugin 'sjl/gundo.vim' " -- Undo Tree Visualizer
+Plugin 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
+
+" -- CSS --
 Plugin 'scrooloose/syntastic' " - Syntax Checker
 Plugin 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
 Plugin 'ap/vim-css-color'
 
-" --- Syntax Highlighing ---- 
+" --- Syntax Highlighing ----
 Plugin 'gregsexton/matchtag'
 Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx' " - JSX Syntax Highlighting
+Plugin 'ntpeters/vim-better-whitespace'
 
-Plugin 'easymotion/vim-easymotion' " -- Easy motion, jump to and from etc 
+Plugin 'easymotion/vim-easymotion' " -- Easy motion, jump to and from etc
 Plugin 'Raimondi/delimitMate' " -- Auto closing of stuff
-Plugin 'tpope/vim-fugitive' " -- Git wrapper
 
 Plugin 'godlygeek/tabular' " -- for Markdown
 Plugin 'plasticboy/vim-markdown' " -- for Markdown
 
 Plugin 'scrooloose/nerdcommenter' " -- commenting
 
-Plugin 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag 
+Plugin 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag
 Plugin 'vim-scripts/JavaScript-Indent'
+Plugin 'mustache/vim-mustache-handlebars'
 
+Bundle "shepherdwind/vim-velocity"
+
+Plugin 'editorconfig/editorconfig-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -76,23 +88,26 @@ set number
 set showcmd
 set incsearch
 set hlsearch
-set clipboard=unnamedplus
+set clipboard=unnamed
 set mouse=a
 set foldmethod=indent
 set ts=2 sw=2 et
 autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+" autocmd BufWritePre * set ff=unix
 
+" ---- Velocity ---- "
+au BufNewFile,BufRead *.vm,*.html,*.htm,*.shtml,*.stm set ft=velocity
 
 " ---- Emmet ----- "
 " let g:user_emmet_expandabbr_key = '<Tab>'
 let g:user_emmet_install_global = 0
 let g:emmet_html5 = 0
 let g:user_emmet_settings = {
-\  'javascript.jsx' : {
-\      'extends' : 'jsx',
-\  },
-\}
-autocmd FileType html,scss,css,javascript.jsx EmmetInstall | imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>") | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
+autocmd FileType velocity,html,scss,css EmmetInstall | imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>") | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 
 :imap <C-BS> <C-w>
 noremap! <C-BS> <C-w>
@@ -100,6 +115,7 @@ noremap! <C-h> <C-w>
 
 " ---- Syntax, Javascript -----
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_javascript_checkers = ["eslint"]
 let g:used_javascript_libs = 'angularjs,angularuirouter,jquery,handlebars'
 let delimitMate_expand_cr = 1
 
@@ -115,7 +131,7 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 let g:indent_guides_enable_on_vim_startup = 1
-let g:rainbow_active = 0 " - 0 if you want to enable it later via :RainbowToggle 
+let g:rainbow_active = 0 " - 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
       \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
       \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
@@ -139,7 +155,7 @@ let g:rainbow_conf = {
       \   }
       \}
 
-" --- Angular Vim --- 
+" --- Angular Vim ---
 let g:angular_filename_convention = 'titlecased'
 
 " --- React Vim ---
@@ -152,7 +168,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 
@@ -179,23 +195,28 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ---- Airline, Tagbar ----- "
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 set laststatus=2
 
 " -- Nerd Tree --
-"autocmd vimenter * NERDTree 
+"autocmd vimenter * NERDTree
 " Go to previous (last accessed) window.
 "autocmd VimEnter * wincmd p
 
+let NERDTreeWinSize = 40
 map  <C-l> :tabn<CR>
 map  <C-h> :tabp<CR>
 map  <C-n> :NERDTreeToggle<CR>
 map  <C-x> :tabc<CR>
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
+
+" --- Gundo ---- "
+nnoremap <F5> :GundoToggle<CR>
 " --- ctrlp -----
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components)$',
-      \ } 
+      \ }
 
 " ---------- Swap Up and Down ---------- "
 function! s:swap_lines(n1, n2)
@@ -225,8 +246,10 @@ function! s:swap_down()
   exec n + 1
 endfunction
 
-" --- Custom Bindings --- 
+" --- Custom Bindings ---
 
+map <c-c> <Esc>\ci
+map <C-o> :CtrlP .<CR>
 imap kj <Esc> " -- quickly jump out of insert mode
 imap jk <Esc> " -- quickly jump out of insert mode
 
@@ -235,7 +258,7 @@ noremap <S-k> 7k
 noremap <S-l> 7l
 noremap <S-h> 7h
 
-nnoremap <BS> i<BS>
+nnoremap <Bs> i<Bs>
 
 noremap <silent> <c-s-k> :call <SID>swap_up()<CR>
 noremap <silent> <c-s-j> :call <SID>swap_down()<CR>
@@ -244,8 +267,37 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 nnoremap <c-i> gg=G''
 inoremap <C-S> <c-o>:Update<CR>
 
-" ----- Change Vim Display ------ " 
+" --- Windows Shit
+inoremap <M-u> <Esc>u
+inoremap <M-r> <Esc>r
+inoremap <M-j> <Esc>j
+inoremap <M-k> <Esc>k
+inoremap <M-h> <Esc>h
+inoremap <M-l> <Esc>l
+inoremap <M-p> <Esc>p
+inoremap <M-o> <Esc>o
+
+nnoremap <M-u> <Esc>u
+nnoremap <M-r> <Esc>r
+nnoremap <M-j> <Esc>j
+nnoremap <M-k> <Esc>k
+nnoremap <M-h> <Esc>h
+nnoremap <M-l> <Esc>l
+nnoremap <M-o> <Esc>o
+
+
+" ----- Change Vim Display ------ "
 hi Normal ctermbg=none
 
 " ------ Auto Indent ---------- "
 let g:html_indent_inctags = "section"
+let g:html_indent_inctags = "p"
+
+" NOTES
+" powerline: install powerline font patches for airline use.
+" best: light version of source code pro
+"
+" javascript syntax checker
+" npm install -g eslint
+" or
+" npm install -g jslint
