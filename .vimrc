@@ -54,8 +54,9 @@ Plugin 'ap/vim-css-color'
 
 " --- Syntax Highlighing ----
 Plugin 'gregsexton/matchtag'
-Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
-Plugin 'pangloss/vim-javascript'
+"Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
+"Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx' " - JSX Syntax Highlighting
 Plugin 'ntpeters/vim-better-whitespace'
 
@@ -95,25 +96,13 @@ filetype plugin indent on    " required
 
 colorscheme vibrantink
 
-" --- GENERAL SETTINGS ---
-
-set backspace=indent,eol,start
-set ruler
-set number
-set showcmd
-set incsearch
-set hlsearch
-set clipboard=unnamed
-set mouse=a
-set foldmethod=indent
-set ts=2 sw=2 et
 
 autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " autocmd BufWritePre * set ff=unix
 
 " ---- Velocity ---- "
 au BufNewFile,BufRead *.vm,*.html,*.htm,*.shtml,*.stm set ft=velocity
-au BufNewFile,BufRead *.jsx set ft=javascript.jsx
+au BufNewFile,BufRead *.js,*.jsx set ft=javascript.jsx
 
 " ---- Emmet ----- "
 " let g:user_emmet_expandabbr_key = '<Tab>'
@@ -322,6 +311,18 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
 "noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
 "noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
 
+" --- GENERAL SETTINGS ---
+
+set backspace=indent,eol,start
+set ruler
+set number
+set showcmd
+set incsearch
+set hlsearch
+set clipboard=unnamed
+set mouse=a
+set foldmethod=indent
+set ts=2 sw=2
 
 " NOTES
 " powerline: install powerline font patches for airline use.
