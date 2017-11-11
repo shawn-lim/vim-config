@@ -1,6 +1,16 @@
+" ------------ USABILITY CONFIGURATION --------- "
+"  Basic and needed settings for source code editing
+
+" Set terminal color to 256
 set t_Co=256
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Do not make VIM compatible with Vi
+set nocompatible
+
+" filetype off
+
+" Encoding is UTF-8
+set encoding=utf-8
+set fileencoding=utf-8
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -33,8 +43,9 @@ Plugin 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
 Plugin 'tpope/vim-fugitive' " -- Git wrapper
 Plugin 'airblade/vim-gitgutter' " -- Git Gutter
 Plugin 'thaerkh/vim-workspace' " -- Vim workspace
-Plugin 'sjl/gundo.vim' " -- Undo Tree Visualizer
+"Plugin 'sjl/gundo.vim' " -- Undo Tree Visualizer
 Plugin 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
+Plugin 'tpope/vim-surround'
 
 " -- CSS --
 Plugin 'scrooloose/syntastic' " - Syntax Checker
@@ -43,8 +54,9 @@ Plugin 'ap/vim-css-color'
 
 " --- Syntax Highlighing ----
 Plugin 'gregsexton/matchtag'
-Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
-Plugin 'pangloss/vim-javascript'
+"Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
+"Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx' " - JSX Syntax Highlighting
 Plugin 'ntpeters/vim-better-whitespace'
 
@@ -62,7 +74,11 @@ Plugin 'mustache/vim-mustache-handlebars'
 
 Bundle "shepherdwind/vim-velocity"
 
+
+" --- Quality of Life ---- "
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'terryma/vim-smooth-scroll'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -80,23 +96,13 @@ filetype plugin indent on    " required
 
 colorscheme vibrantink
 
-" --- GENERAL SETTINGS ---
 
-set backspace=indent,eol,start
-set ruler
-set number
-set showcmd
-set incsearch
-set hlsearch
-set clipboard=unnamed
-set mouse=a
-set foldmethod=indent
-set ts=2 sw=2 et
 autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " autocmd BufWritePre * set ff=unix
 
 " ---- Velocity ---- "
 au BufNewFile,BufRead *.vm,*.html,*.htm,*.shtml,*.stm set ft=velocity
+au BufNewFile,BufRead *.js,*.jsx set ft=javascript.jsx
 
 " ---- Emmet ----- "
 " let g:user_emmet_expandabbr_key = '<Tab>'
@@ -107,7 +113,7 @@ let g:user_emmet_settings = {
       \      'extends' : 'jsx',
       \  },
       \}
-autocmd FileType velocity,html,scss,css EmmetInstall | imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>") | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
+autocmd FileType javascript.jsx,velocity,html,scss,css EmmetInstall | imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>") | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 
 :imap <C-BS> <C-w>
 noremap! <C-BS> <C-w>
@@ -218,6 +224,8 @@ let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components)$',
       \ }
 
+let g:ctrlp_clear_cache_on_exit = 0
+
 " ---------- Swap Up and Down ---------- "
 function! s:swap_lines(n1, n2)
   let line1 = getline(a:n1)
@@ -253,19 +261,22 @@ map <C-o> :CtrlP .<CR>
 imap kj <Esc> " -- quickly jump out of insert mode
 imap jk <Esc> " -- quickly jump out of insert mode
 
-noremap <S-j> 7j
-noremap <S-k> 7k
-noremap <S-l> 7l
-noremap <S-h> 7h
+noremap <S-j> 5j
+noremap <S-k> 5k
+noremap <S-l> 5l
+noremap <S-h> 5h
 
 nnoremap <Bs> i<Bs>
 
 noremap <silent> <c-s-k> :call <SID>swap_up()<CR>
 noremap <silent> <c-s-j> :call <SID>swap_down()<CR>
+
+nmap     <C-F> <Plug>CtrlSFPrompt
+vmap     <C-F> <Plug>CtrlSFVwordExec
+
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 nnoremap <c-i> gg=G''
-inoremap <C-S> <c-o>:Update<CR>
 
 " --- Windows Shit
 inoremap <M-u> <Esc>u
@@ -292,6 +303,26 @@ hi Normal ctermbg=none
 " ------ Auto Indent ---------- "
 let g:html_indent_inctags = "section"
 let g:html_indent_inctags = "p"
+
+" --- Smooth Scroll --- "
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
+"noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
+"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
+
+" --- GENERAL SETTINGS ---
+
+set backspace=indent,eol,start
+set ruler
+set number
+set showcmd
+set incsearch
+set hlsearch
+set clipboard=unnamed
+set mouse=a
+set foldmethod=indent
+set ts=2 sw=2
 
 " NOTES
 " powerline: install powerline font patches for airline use.
