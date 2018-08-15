@@ -42,25 +42,27 @@ Plugin 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
 " --- Logistics --- "
 Plugin 'tpope/vim-fugitive' " -- Git wrapper
 Plugin 'airblade/vim-gitgutter' " -- Git Gutter
-Plugin 'thaerkh/vim-workspace' " -- Vim workspace
+"Plugin 'thaerkh/vim-workspace' " -- Vim workspace
 "Plugin 'sjl/gundo.vim' " -- Undo Tree Visualizer
 Plugin 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
 Plugin 'tpope/vim-surround'
 
 " -- CSS --
-Plugin 'scrooloose/syntastic' " - Syntax Checker
-Plugin 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
+"Plugin 'scrooloose/syntastic' " - Syntax Checker
+"Plugin 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
 Plugin 'ap/vim-css-color'
 
 " --- Syntax Highlighing ----
+Plugin 'leafgarland/typescript-vim'
 Plugin 'gregsexton/matchtag'
 "Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
-"Plugin 'pangloss/vim-javascript'
-Plugin 'othree/yajs.vim'
+Plugin 'pangloss/vim-javascript'
+"Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx' " - JSX Syntax Highlighting
-Plugin 'ntpeters/vim-better-whitespace'
+"Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'styled-components/vim-styled-components'
 
-Plugin 'easymotion/vim-easymotion' " -- Easy motion, jump to and from etc
+"Plugin 'easymotion/vim-easymotion' " -- Easy motion, jump to and from etc
 Plugin 'Raimondi/delimitMate' " -- Auto closing of stuff
 
 Plugin 'godlygeek/tabular' " -- for Markdown
@@ -70,14 +72,14 @@ Plugin 'scrooloose/nerdcommenter' " -- commenting
 
 Plugin 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag
 Plugin 'vim-scripts/JavaScript-Indent'
-Plugin 'mustache/vim-mustache-handlebars'
-
-Bundle "shepherdwind/vim-velocity"
-
 
 " --- Quality of Life ---- "
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'terryma/vim-smooth-scroll'
+
+" -- Prettier -- "
+Plugin 'prettier/vim-prettier'
+Plugin 'heavenshell/vim-jsdoc'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -100,9 +102,65 @@ colorscheme vibrantink
 autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " autocmd BufWritePre * set ff=unix
 
+" ----- Prettier ----- "
+" max line length that prettier will wrap on
+" Prettier default: 80
+let g:prettier#config#print_width = 120
+
+" number of spaces per indentation level
+" Prettier default: 2
+let g:prettier#config#tab_width = 2
+
+" use tabs over spaces
+" Prettier default: false
+let g:prettier#config#use_tabs = 'false'
+
+" print semicolons
+" Prettier default: true
+let g:prettier#config#semi = 'true'
+
+" single quotes over double quotes
+" Prettier default: false
+let g:prettier#config#single_quote = 'true'
+
+" print spaces between brackets
+" Prettier default: true
+let g:prettier#config#bracket_spacing = 'true'
+
+" put > on the last line instead of new line
+" Prettier default: false
+let g:prettier#config#jsx_bracket_same_line = 'true'
+
+" avoid|always
+" Prettier default: avoid
+let g:prettier#config#arrow_parens = 'always'
+
+" none|es5|all
+" Prettier default: none
+let g:prettier#config#trailing_comma = 'none'
+
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown
+" Prettier default: babylon
+let g:prettier#config#parser = 'flow'
+
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = 'prefer-file'
+
+" always|never|preserve
+let g:prettier#config#prose_wrap = 'preserve'
+
+" run async on prettier cmd
+let g:prettier#exec_cmd_async = 1
+
+" ----- JsDoc -------"
+let g:jsdoc_allow_input_prompt  = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_enable_es6 = 1
+
 " ---- Velocity ---- "
-au BufNewFile,BufRead *.vm,*.html,*.htm,*.shtml,*.stm set ft=velocity
-au BufNewFile,BufRead *.js,*.jsx set ft=javascript.jsx
+au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=html
+au BufNewFile,BufRead *.tsx,*.js,*.jsx set ft=javascript.jsx
+au BufNewFile,BufRead *.ts set ft=typescript
 
 " ---- Emmet ----- "
 " let g:user_emmet_expandabbr_key = '<Tab>'
@@ -124,6 +182,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_javascript_checkers = ["eslint"]
 let g:used_javascript_libs = 'angularjs,angularuirouter,jquery,handlebars'
 let delimitMate_expand_cr = 1
+let g:javascript_plugin_flow = 1
 
 augroup mydelimitMate
   au!
@@ -221,7 +280,7 @@ noremap! <C-h> <C-w>
 nnoremap <F5> :GundoToggle<CR>
 " --- ctrlp -----
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components)$',
+      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components|coverage|dist-*)$',
       \ }
 
 let g:ctrlp_clear_cache_on_exit = 0
@@ -257,7 +316,6 @@ endfunction
 " --- Custom Bindings ---
 
 map <c-c> <Esc>\ci
-map <C-o> :CtrlP .<CR>
 imap kj <Esc> " -- quickly jump out of insert mode
 imap jk <Esc> " -- quickly jump out of insert mode
 
@@ -296,6 +354,8 @@ nnoremap <M-h> <Esc>h
 nnoremap <M-l> <Esc>l
 nnoremap <M-o> <Esc>o
 
+" ----- Nerd Commenter ------ "
+let g:NERDSpaceDelims = 1
 
 " ----- Change Vim Display ------ "
 hi Normal ctermbg=none
@@ -322,7 +382,7 @@ set hlsearch
 set clipboard=unnamed
 set mouse=a
 set foldmethod=indent
-set ts=2 sw=2
+set ts=2 sw=2 expandtab
 
 " NOTES
 " powerline: install powerline font patches for airline use.
