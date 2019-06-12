@@ -75,6 +75,8 @@ Plugin 'vim-scripts/JavaScript-Indent'
 
 " --- Quality of Life ---- "
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'universal-ctags/ctags'
+Plugin 'ludovicchabant/vim-gutentags'
 
 " -- Prettier -- "
 Plugin 'prettier/vim-prettier'
@@ -392,3 +394,5 @@ set ts=2 sw=2 expandtab
 " npm install -g eslint
 " or
 " npm install -g jslint
+
+set tags=./tags;/
