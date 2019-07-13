@@ -13,78 +13,84 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin('~/.vim/bundle/')
+" set rtp+=~/.vim/bundle/Vundle.vim/
+" call vundle#begin('~/.vim/bundle/')
+call plug#begin('~/.vim/bundle/')
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Plug 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
 " -- Safe Essentials --
-Plugin 'kien/ctrlp.vim' " - CTRLP - required file opener
-Plugin 'mattn/emmet-vim' " - HTML, CSS Expander
-Plugin 'othree/html5.vim' " - HTML5 Support
-Plugin 'flazz/vim-colorschemes'
+Plug 'kien/ctrlp.vim' " - CTRLP - required file opener
+Plug 'mattn/emmet-vim' " - HTML, CSS Expander
+Plug 'othree/html5.vim' " - HTML5 Support
+Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
 
-Plugin 'jistr/vim-nerdtree-tabs' " - Tab view for Nerdtree
-Plugin 'scrooloose/nerdtree.git' " - Nerdtree folder viewer
+Plug 'jistr/vim-nerdtree-tabs' " - Tab view for Nerdtree
+Plug 'scrooloose/nerdtree' " - Nerdtree folder viewer
 
-"Plugin 'nathanaelkane/vim-indent-guides' " - Indent Guides
-Plugin 'Yggdroot/indentLine'
+"Plug 'nathanaelkane/vim-indent-guides' " - Indent Guides
+Plug 'Yggdroot/indentLine'
 
-Plugin 'vim-airline/vim-airline-themes' " - Themes for airlines
-Plugin 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
+Plug 'vim-airline/vim-airline-themes' " - Themes for airlines
+Plug 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
 
 " --- Logistics --- "
-Plugin 'tpope/vim-fugitive' " -- Git wrapper
-Plugin 'airblade/vim-gitgutter' " -- Git Gutter
-"Plugin 'thaerkh/vim-workspace' " -- Vim workspace
-"Plugin 'sjl/gundo.vim' " -- Undo Tree Visualizer
-Plugin 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive' " -- Git wrapper
+Plug 'airblade/vim-gitgutter' " -- Git Gutter
+"Plug 'thaerkh/vim-workspace' " -- Vim workspace
+"Plug 'sjl/gundo.vim' " -- Undo Tree Visualizer
+Plug 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
+Plug 'tpope/vim-surround'
 
 " -- CSS --
-"Plugin 'scrooloose/syntastic' " - Syntax Checker
-"Plugin 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
-Plugin 'ap/vim-css-color'
+"Plug 'scrooloose/syntastic' " - Syntax Checker
+"Plug 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
+Plug 'ap/vim-css-color'
 
 " --- Syntax Highlighing ----
-Plugin 'leafgarland/typescript-vim'
-Plugin 'gregsexton/matchtag'
-"Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
-Plugin 'pangloss/vim-javascript'
-"Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx' " - JSX Syntax Highlighting
-"Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'styled-components/vim-styled-components'
+Plug 'leafgarland/typescript-vim'
+Plug 'gregsexton/matchtag'
+"Plug 'burnettk/vim-angular' " - Angular Syntax fixes
+Plug 'pangloss/vim-javascript'
+"Plug 'othree/yajs.vim'
+Plug 'mxw/vim-jsx' " - JSX Syntax Highlighting
+" Plug 'ianks/vim-tsx'
+Plug 'maxmellon/vim-jsx-pretty'
 
-"Plugin 'easymotion/vim-easymotion' " -- Easy motion, jump to and from etc
-Plugin 'Raimondi/delimitMate' " -- Auto closing of stuff
+"Plug 'ntpeters/vim-better-whitespace'
+Plug 'styled-components/vim-styled-components'
 
-Plugin 'godlygeek/tabular' " -- for Markdown
-Plugin 'plasticboy/vim-markdown' " -- for Markdown
+Plug 'Raimondi/delimitMate' " -- Auto closing of stuff
 
-Plugin 'scrooloose/nerdcommenter' " -- commenting
+Plug 'godlygeek/tabular' " -- for Markdown
+Plug 'plasticboy/vim-markdown' " -- for Markdown
 
-Plugin 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag
-Plugin 'vim-scripts/JavaScript-Indent'
+Plug 'scrooloose/nerdcommenter' " -- commenting
+
+Plug 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag
+Plug 'vim-scripts/JavaScript-Indent'
 
 " --- Quality of Life ---- "
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'universal-ctags/ctags'
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'editorconfig/editorconfig-vim'
 
 " -- Prettier -- "
-Plugin 'prettier/vim-prettier'
-Plugin 'heavenshell/vim-jsdoc'
+Plug 'prettier/vim-prettier'
+Plug 'heavenshell/vim-jsdoc'
 
+" -- Intellisense -- "
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+" call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -98,9 +104,12 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-colorscheme vibrantink
+"colorscheme vibrantink
+colorscheme gruvbox
 
 
+autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " autocmd BufWritePre * set ff=unix
 
@@ -161,19 +170,23 @@ let g:jsdoc_enable_es6 = 1
 
 " ---- Velocity ---- "
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=html
-au BufNewFile,BufRead *.tsx,*.js,*.jsx set ft=javascript.jsx
-au BufNewFile,BufRead *.ts set ft=typescript
+au BufNewFile,BufRead *.js,*.jsx set ft=javascript.jsx
+au BufNewFile,BufRead *.tsx,*.ts set ft=typescript.tsx
 
 " ---- Emmet ----- "
-" let g:user_emmet_expandabbr_key = '<Tab>'
+let g:user_emmet_expandabbr_key = '<C-Y>'
 let g:user_emmet_install_global = 0
 let g:emmet_html5 = 0
 let g:user_emmet_settings = {
       \  'javascript.jsx' : {
       \      'extends' : 'jsx',
       \  },
+      \  'typescript.tsx' : {
+      \      'extends' : 'tsx',
+      \  },
       \}
-autocmd FileType javascript.jsx,velocity,html,scss,css EmmetInstall | imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>") | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
+" autocmd FileType typescript.tsx,javascript.jsx,velocity,html,scss,css EmmetInstall | imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>") | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
+autocmd FileType typescript.tsx,javascript.jsx,velocity,html,scss,css EmmetInstall | let b:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 
 :imap <C-BS> <C-w>
 noremap! <C-BS> <C-w>
@@ -244,9 +257,19 @@ syntax on
 " ---- UltiSnips ----
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
 
 " ---- You Complete Me Settings ----- "
 let g:ycm_filetype_blacklist = {
@@ -282,7 +305,7 @@ noremap! <C-h> <C-w>
 nnoremap <F5> :GundoToggle<CR>
 " --- ctrlp -----
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components|coverage|dist-*)$',
+      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components|coverage|dist-*|android|ios)$',
       \ }
 
 let g:ctrlp_clear_cache_on_exit = 0
@@ -337,6 +360,29 @@ vmap     <C-F> <Plug>CtrlSFVwordExec
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 nnoremap <c-i> gg=G''
+
+" -- Intellisense
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+set updatetime=300
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+nmap <silent> gi <Plug>(coc-implementation)
+
 
 " --- Windows Shit
 inoremap <M-u> <Esc>u
@@ -394,5 +440,3 @@ set ts=2 sw=2 expandtab
 " npm install -g eslint
 " or
 " npm install -g jslint
-
-set tags=./tags;/
