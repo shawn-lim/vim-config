@@ -13,84 +13,85 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim/
-" call vundle#begin('~/.vim/bundle/')
-call plug#begin('~/.vim/bundle/')
+set rtp+=~/.config/nvim/bundle/Vundle.vim/
+
+call vundle#begin('~/.config/nvim/bundle/')
+" call plug#begin('~/.vim/bundle/')
 
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-" Plug 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
 " -- Safe Essentials --
-Plug 'kien/ctrlp.vim' " - CTRLP - required file opener
-Plug 'mattn/emmet-vim' " - HTML, CSS Expander
-Plug 'othree/html5.vim' " - HTML5 Support
-Plug 'flazz/vim-colorschemes'
-Plug 'morhetz/gruvbox'
+Plugin 'kien/ctrlp.vim' " - CTRLP - required file opener
+Plugin 'mattn/emmet-vim' " - HTML, CSS Expander
+Plugin 'othree/html5.vim' " - HTML5 Support
+Plugin 'flazz/vim-colorschemes'
+Plugin 'morhetz/gruvbox'
 
-Plug 'jistr/vim-nerdtree-tabs' " - Tab view for Nerdtree
-Plug 'scrooloose/nerdtree' " - Nerdtree folder viewer
+Plugin 'jistr/vim-nerdtree-tabs' " - Tab view for Nerdtree
+Plugin 'scrooloose/nerdtree' " - Nerdtree folder viewer
 
-"Plug 'nathanaelkane/vim-indent-guides' " - Indent Guides
-Plug 'Yggdroot/indentLine'
+"Plugin 'nathanaelkane/vim-indent-guides' " - Indent Guides
+Plugin 'Yggdroot/indentLine'
 
-Plug 'vim-airline/vim-airline-themes' " - Themes for airlines
-Plug 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
+Plugin 'vim-airline/vim-airline-themes' " - Themes for airlines
+Plugin 'vim-airline/vim-airline' " - Airlines is the top/bottom navbar
 
 " --- Logistics --- "
-Plug 'tpope/vim-fugitive' " -- Git wrapper
-Plug 'airblade/vim-gitgutter' " -- Git Gutter
-"Plug 'thaerkh/vim-workspace' " -- Vim workspace
-"Plug 'sjl/gundo.vim' " -- Undo Tree Visualizer
-Plug 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
-Plug 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive' " -- Git wrapper
+Plugin 'airblade/vim-gitgutter' " -- Git Gutter
+"Plugin 'thaerkh/vim-workspace' " -- Vim workspace
+"Plugin 'sjl/gundo.vim' " -- Undo Tree Visualizer
+Plugin 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor stuff
+Plugin 'tpope/vim-surround'
 
 " -- CSS --
-"Plug 'scrooloose/syntastic' " - Syntax Checker
-"Plug 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
-Plug 'ap/vim-css-color'
+"Plugin 'scrooloose/syntastic' " - Syntax Checker
+"Plugin 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
+Plugin 'ap/vim-css-color'
 
 " --- Syntax Highlighing ----
-Plug 'leafgarland/typescript-vim'
-Plug 'gregsexton/matchtag'
-"Plug 'burnettk/vim-angular' " - Angular Syntax fixes
-Plug 'pangloss/vim-javascript'
-"Plug 'othree/yajs.vim'
-Plug 'mxw/vim-jsx' " - JSX Syntax Highlighting
-" Plug 'ianks/vim-tsx'
-Plug 'maxmellon/vim-jsx-pretty'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'gregsexton/matchtag'
+"Plugin 'burnettk/vim-angular' " - Angular Syntax fixes
+Plugin 'pangloss/vim-javascript'
+"Plugin 'othree/yajs.vim'
+Plugin 'mxw/vim-jsx' " - JSX Syntax Highlighting
+" Plugin 'ianks/vim-tsx'
+Plugin 'maxmellon/vim-jsx-pretty'
 
-"Plug 'ntpeters/vim-better-whitespace'
-Plug 'styled-components/vim-styled-components'
+"Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'styled-components/vim-styled-components'
 
-Plug 'Raimondi/delimitMate' " -- Auto closing of stuff
+Plugin 'Raimondi/delimitMate' " -- Auto closing of stuff
 
-Plug 'godlygeek/tabular' " -- for Markdown
-Plug 'plasticboy/vim-markdown' " -- for Markdown
+Plugin 'godlygeek/tabular' " -- for Markdown
+Plugin 'plasticboy/vim-markdown' " -- for Markdown
 
-Plug 'scrooloose/nerdcommenter' " -- commenting
+Plugin 'scrooloose/nerdcommenter' " -- commenting
 
-Plug 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag
-Plug 'vim-scripts/JavaScript-Indent'
+Plugin 'dyng/ctrlsf.vim' " - Requires AG : apt-get install silversearcher-ag
+Plugin 'vim-scripts/JavaScript-Indent'
 
 " --- Quality of Life ---- "
-Plug 'editorconfig/editorconfig-vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 " -- Prettier -- "
-Plug 'prettier/vim-prettier'
-Plug 'heavenshell/vim-jsdoc'
+Plugin 'prettier/vim-prettier'
+Plugin 'heavenshell/vim-jsdoc'
 
 " -- Intellisense -- "
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " All of your Plugins must be added before the following line
 " call vundle#end()            " required
-call plug#end()            " required
+call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -304,8 +305,8 @@ noremap! <C-h> <C-w>
 " --- Gundo ---- "
 nnoremap <F5> :GundoToggle<CR>
 " --- ctrlp -----
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|node_modules|bower_components|coverage|dist-*|android|ios)$',
+ let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|_site|__tests__|node_modules|bower_components|coverage|dist-*|android|ios)$',
       \ }
 
 let g:ctrlp_clear_cache_on_exit = 0
@@ -374,6 +375,12 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -429,8 +436,13 @@ set incsearch
 set hlsearch
 set clipboard=unnamed
 set mouse=a
-set foldmethod=indent
 set ts=2 sw=2 expandtab
+
+"-- FOLDING --
+set foldmethod=syntax "syntax highlighting items specify folds
+set foldcolumn=1 "defines 1 col at window left, to indicate folding
+let javaScript_fold=1 "activate folding by JS syntax
+set foldlevelstart=99 "start file with all folds opened
 
 " NOTES
 " powerline: install powerline font patches for airline use.
