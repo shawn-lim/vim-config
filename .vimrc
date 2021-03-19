@@ -52,7 +52,7 @@ Plugin 'tpope/vim-sensible' " -- Sensible Vim, for setting some default editor s
 Plugin 'tpope/vim-surround'
 
 " -- CSS --
-"Plugin 'scrooloose/syntastic' " - Syntax Checker
+Plugin 'vim-syntastic/syntastic'
 "Plugin 'cakebaker/scss-syntax.vim' " - Syntax Checking for SCSS
 Plugin 'ap/vim-css-color'
 
@@ -85,6 +85,7 @@ Plugin 'editorconfig/editorconfig-vim'
 " -- Prettier -- "
 Plugin 'prettier/vim-prettier'
 Plugin 'heavenshell/vim-jsdoc'
+Plugin 'eslint/eslint'
 
 " -- Intellisense -- "
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -196,6 +197,7 @@ noremap! <C-h> <C-w>
 " ---- Syntax, Javascript -----
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_typescript_checkers = ["eslint"]
 let g:used_javascript_libs = 'angularjs,angularuirouter,jquery,handlebars'
 let delimitMate_expand_cr = 1
 let g:javascript_plugin_flow = 1
@@ -249,9 +251,8 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
 
 syntax on
 
